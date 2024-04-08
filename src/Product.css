@@ -28,6 +28,7 @@
     margin-top: 10px;
     border-color: rgb(198, 182, 32);
     color: #111;
+    cursor: pointer;
 }
 
 .product_price{
