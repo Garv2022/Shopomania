@@ -40,7 +40,11 @@ const reducer = (state, action) =>{
                     ...state,
                     cart: state.cart.filter(item => item.id !== action.payLoad
             )}; */
-
+            case "SET_USER":
+                return{
+                    ...state,
+                    user: action.user
+                }
         default:
             return state;
     }
