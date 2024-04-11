@@ -48,7 +48,6 @@ function Checkout() {
 
         <div className='checkout_right'>
           <Subtotal />
-          <h2>Subtotal</h2>
         </div>
     </div>
   )
