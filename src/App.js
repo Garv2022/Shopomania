@@ -8,10 +8,16 @@ import Login from "./Login";
 import { auth } from "./firebase";
 import { useStateValue } from "./StateProvider";
 import Payment from './Payment';
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+const promise = loadStripe(
+  pk_test_51P52NNSJ50g020uXpKcU3ghE3H9CKB7ObXfAqZNHc0dvP9c69Ya65gZIlo2by23Cw4UMt3Fmpg7DMxGiAR2dMVOf00blYaIGZV
+);
+
 
 function App() {
   const [{}, dispatch] = useStateValue();
-
 
   //like if statement in react
   useEffect(() => {
@@ -42,7 +48,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/checkout" element={<Checkout />} /> 
-          <Route path="/payment" element={<Payment />} />           
+          <Route path="/payment" element stripe={<Payment />} />           
           <Route path="/" element={<Home />} />
         </Routes>
       </div>
