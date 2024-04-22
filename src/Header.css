@@ -1,5 +1,72 @@
-/* Header Styles */
 .header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #131921;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .header_logo {
+    width: 100px;
+    object-fit: contain;
+    margin: 0 20px;
+    margin-top: 18px;
+  }
+  
+  .header_search {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    border-radius: 24px;
+  }
+  
+  .header_searchInput {
+    height: 12px;
+    padding: 10px;
+    border: none;
+    width: 100%;
+  }
+  
+  .header_searchIcon {
+    padding: 5px;
+    height: 22px !important;
+    background-color: #cd9042;
+  }
+  
+  .header_optionLineOne {
+    font-size: 10px;
+  }
+  
+  .header_optionLineTwo {
+    font-size: 13px;
+    font-weight: 800;
+  }
+  
+  .header_optionBasket {
+    display: flex;
+    align-items: center;
+    color: white;
+  }
+  
+  .header_basketCount {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  .header_nav {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .header_option {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+  }.header{
     height: 60px;
     display: flex;
     align-items: center;
@@ -7,66 +74,64 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
 }
 
-.header_logo {
+.header_logo{
     width: 100px;
     object-fit: contain;
     margin: 0 20px;
     margin-top: 18px;
 }
 
-.header_search {
+.header_search{
     display: flex;
     flex: 1;
     align-items: center;
     border-radius: 24px;
-    background-color: #fff; /* Add background color */
-    padding: 5px;
 }
 
-.header_searchInput {
-    height: 100%;
+.header_searchInput{
+    height: 12px;
     padding: 10px;
     border: none;
     width: 100%;
-    outline: none; /* Remove default input focus outline */
 }
 
-.header_searchIcon {
+.header_searchIcon{
     padding: 5px;
     height: 22px;
-    background-color: #007bff; /* Change to blue color */
+    background-color: orange;
 }
 
-.header_nav {
+.header_optionLineOne{
+    font-size: 10px;
+}
+
+.header_optionLineTwo{
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.header_nav{
     display: flex;
     justify-content: space-evenly;
 }
 
-.header_option {
+.header_option{
     display: flex;
     flex-direction: column;
     margin-left: 10px;
     margin-right: 10px;
     color: white;
-    transition: color 0.3s ease; /* Add transition effect */
 }
 
-.header_option:hover {
-    color: #ffd700; /* Change color on hover */
-}
-
-.header_optionBasket {
-    display: flex; /* Fix typo */
+.header_optionBasket{
+    display: center;
     align-items: center;
     color: white;
 }
 
-.header_BasketCount {
+.header_BasketCount{
     margin-left: 10px;
     margin-right: 10px;
 }
-
-/* Add additional styling for other sections of your page */
