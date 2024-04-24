@@ -2,37 +2,61 @@ import React, { useEffect, useState } from 'react'
 import './Payment.css'
 import { useStateValue } from './StateProvider'
 import CheckoutProduct from './CheckoutProduct';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate } from 'react-router-dom';
 import {CardElement,useElements, useStripe } from '@stripe/react-stripe-js';
 import CurrencyFormat from 'react-currency-format';
 import { getCartTotal } from './reducer';
+import axios from './axios';
+
 
 function Payment() {
   const [{cart, user}, dispatch] = useStateValue();
+  const navigate = useNavigate();   //history = useHistory();
 
   const stripe = useStripe();
   const elements = useElements();
+  
 
   const [succeeded, setsucceeded] = useState(false);
   const [processing, setprocessing] = useState("");
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(true);
-  const [clientSecret, setClientSecret] = useState(true);
+  const [clientSecret, setClientSecret] = useState();
 
   useEffect(() =>{
     //generate special stripe secret which allows us to change customer
     const getClientSecret = async () =>{
-        const response = await axios 
+        const response = await axios ({
+          method: 'post',
+          //stripe expects the total in currencies subunits
+          url: `/payments/create?total=${getCartTotal(cart)*100}`
+        });
+        setClientSecret(response.data.clientSecret)
     }
     getClientSecret();
   }, [cart])
+
   const handleSubmit = async (e) =>{
       //do all stripe things
       e.preventDefault();
       setprocessing(true);
 
-      //const payload = await stripe
-  }
+      const payload = await stripe.confirmCardPayment(clientSecret,{
+          payment_method: {
+            card: elements.getElement(CardElement)
+          }
+      }).then(({ paymentIntent}) =>{
+        //paymentIntent = payment confirmation
+        setsucceeded(true);
+        setError(null);
+        setprocessing(false);
+
+        navigate('/orders')
+      }) 
+
+      }
+
+  
 
   const handleChange = e =>{
       //listen for chnages in the cardelement
@@ -101,10 +125,9 @@ function Payment() {
                     thousandSeparator={true}
                     prefix={'₹'}
                   />
-                  <button disabled={processing || disabled || 
-                  succeeded}></button>
+                  <button>
                       <span>{processing ? <p>Processing</p>:
-                      "Buy Now"}</span>
+                      "Buy Now"}</span></button>
                   </div>
 
                   {error && <div>{error}</div>}
@@ -116,6 +139,8 @@ function Payment() {
       </div>
     </div>
   )
+
 }
 
 export default Payment
+
